@@ -1,0 +1,271 @@
+2025-09-29 00:19:19,446 - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\SIRJAN NISHAD\\AppData\\Roaming\\Python\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-09-29 00:19:19,446 - INFO - Using writeable comtypes cache directory: 'C:\Users\SIRJAN NISHAD\AppData\Roaming\Python\Python313\site-packages\comtypes\gen'
+2025-09-29 00:19:20,026 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-29 00:19:20,026 - INFO - [33mPress CTRL+C to quit[0m
+2025-09-29 00:19:20,032 - INFO -  * Restarting with stat
+2025-09-29 00:19:23,543 - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\SIRJAN NISHAD\\AppData\\Roaming\\Python\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-09-29 00:19:23,552 - INFO - Using writeable comtypes cache directory: 'C:\Users\SIRJAN NISHAD\AppData\Roaming\Python\Python313\site-packages\comtypes\gen'
+2025-09-29 00:19:23,874 - WARNING -  * Debugger is active!
+2025-09-29 00:19:23,903 - INFO -  * Debugger PIN: 346-891-238
+2025-09-29 00:20:33,509 - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\SIRJAN NISHAD\\AppData\\Roaming\\Python\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-09-29 00:20:33,510 - INFO - Using writeable comtypes cache directory: 'C:\Users\SIRJAN NISHAD\AppData\Roaming\Python\Python313\site-packages\comtypes\gen'
+2025-09-29 00:20:40,714 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:40,806 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:40,893 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:40,982 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,072 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,154 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,245 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,333 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,420 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,506 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,595 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,716 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,818 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,904 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:41,997 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,085 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,180 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,270 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,353 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,439 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,526 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,612 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,700 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,787 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,877 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:42,962 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,049 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,135 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,224 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,306 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,394 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,476 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,563 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,653 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,743 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,830 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:43,917 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,000 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,084 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,174 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,259 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,343 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,433 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,517 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,609 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,691 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,782 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,870 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:44,953 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,038 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,135 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,225 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,312 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,403 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,488 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,572 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,659 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,742 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,827 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:45,913 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,001 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,090 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,176 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,264 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,351 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,440 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,529 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,624 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,714 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,798 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,885 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:46,972 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,056 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,153 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,241 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,330 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,419 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,503 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,590 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,678 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,763 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,876 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:47,987 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,077 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,164 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,253 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,343 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,432 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,533 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,620 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,708 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,793 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,881 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:48,966 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,052 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,140 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,224 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,311 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,398 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,483 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,571 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,655 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,738 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,831 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:49,929 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,011 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,100 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,185 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,269 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,356 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,444 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,531 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,618 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,707 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,795 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,880 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:50,966 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,051 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,137 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,224 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,318 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,407 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,493 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,582 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,673 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,759 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,842 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:51,927 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,015 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,099 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,186 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,271 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,362 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,455 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,541 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,629 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,718 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,807 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,892 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:52,976 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,062 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,155 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,245 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,339 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,436 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,524 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,610 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,696 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,787 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,878 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:53,964 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,054 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,143 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,228 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,366 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,459 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,556 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,642 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,726 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,813 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,902 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:54,984 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,069 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,154 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,244 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,328 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,411 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,499 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,584 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,670 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,755 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,840 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:55,923 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,006 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,096 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,178 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,271 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,369 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,458 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,542 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,632 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,719 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,803 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,885 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:56,969 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:57,052 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:57,144 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:57,233 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:57,326 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:57,411 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:20:57,500 - ERROR - Microphone error: Could not find PyAudio; check installation
+2025-09-29 00:23:02,186 - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\SIRJAN NISHAD\\AppData\\Roaming\\Python\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-09-29 00:23:02,187 - INFO - Using writeable comtypes cache directory: 'C:\Users\SIRJAN NISHAD\AppData\Roaming\Python\Python313\site-packages\comtypes\gen'
+2025-09-29 00:23:17,103 - INFO - Unrecognized command: chai banaa ke sare kapde
+2025-09-29 00:23:25,382 - INFO - Unrecognized command: copy likha tera jivan bhar
+2025-09-29 00:23:35,869 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:23:42,636 - INFO - Unrecognized command: so jaenge yaar
+2025-09-29 00:23:53,287 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:24:21,251 - ERROR - Weather error: 404 Client Error: Not Found for url: http://api.openweathermap.org/data/2.5/weather?q=what's%20the&appid=e978b3f1a04094cec994b3ad2757ece7&units=metric
+2025-09-29 00:24:28,028 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:24:34,172 - ERROR - Invalid expression: the weather
+2025-09-29 00:24:40,654 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:24:47,157 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:25:00,034 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:25:04,205 - ERROR - Invalid expression: the battery
+2025-09-29 00:25:10,737 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:25:17,223 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:25:23,553 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:25:29,883 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:25:36,197 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:25:42,672 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:25:49,180 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:25:55,703 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:26:02,269 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:26:08,787 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:26:15,304 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:26:21,835 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:26:28,387 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:26:34,916 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:26:41,462 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:26:47,988 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:26:54,513 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:01,039 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:07,563 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:14,106 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:20,645 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:27,199 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:33,792 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:40,326 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:46,863 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:53,375 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:27:59,915 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:28:06,450 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:28:12,979 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:28:19,526 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:28:26,055 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:28:32,593 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:29:24,942 - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\SIRJAN NISHAD\\AppData\\Roaming\\Python\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-09-29 00:29:24,943 - INFO - Using writeable comtypes cache directory: 'C:\Users\SIRJAN NISHAD\AppData\Roaming\Python\Python313\site-packages\comtypes\gen'
+2025-09-29 00:29:57,068 - ERROR - Invalid expression: the weather
+2025-09-29 00:30:49,514 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:31:07,650 - ERROR - Invalid expression: the article
+2025-09-29 00:32:25,617 - ERROR - Weather error: 404 Client Error: Not Found for url: http://api.openweathermap.org/data/2.5/weather?q=tell%20me&appid=e978b3f1a04094cec994b3ad2757ece7&units=metric
+2025-09-29 00:32:44,110 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:33:02,637 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:33:24,277 - INFO - Unrecognized command: calculator
+2025-09-29 00:34:01,218 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:34:19,814 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:34:38,347 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:34:56,829 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:35:10,270 - INFO - Unrecognized command: calculator
+2025-09-29 00:35:28,845 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:35:47,318 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:36:18,768 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:36:38,164 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:36:58,049 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:37:17,058 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:37:35,791 - ERROR - Microphone error: listening timed out while waiting for phrase to start
+2025-09-29 00:37:54,661 - ERROR - Microphone error: listening timed out while waiting for phrase to start
