@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECHO AI - Neural Interface</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 150, 200, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 200, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(100, 200, 255, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0f1c 0%, #162447 50%, #1f2937 100%);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(0, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particleFloat 8s linear infinite;
+        }
+        
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(50px) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            display: grid;
+            grid-template-areas: 
+                ". header ."
+                "left-panel center right-panel"
+                ". chat-panel .";
+            grid-template-columns: 300px 1fr 300px;
+            grid-template-rows: auto 400px auto;
+            min-height: 100vh;
+            padding: 20px;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .header {
+            grid-area: header;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099ff 50%, #0066cc 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: logoShimmer 3s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes logoShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            letter-spacing: 3px;
+            color: #00d4ff;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+        
+        .center {
+            grid-area: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+        }
+        
+        .holo-circle {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid transparent;
+        }
+        
+        .ring-1 {
+            width: 400px;
+            height: 400px;
+            border-color: rgba(0, 255, 255, 0.3);
+            animation: rotate 20s linear infinite;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+        
+        .ring-2 {
+            width: 360px;
+            height: 360px;
+            border-color: rgba(0, 255, 255, 0.4);
+            animation: rotate 18s linear infinite reverse;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .ring-3 {
+            width: 320px;
+            height: 320px;
+            border-color: rgba(0, 255, 255, 0.5);
+            animation: rotate 16s linear infinite;
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+        }
+        
+        .ring-4 {
+            width: 280px;
+            height: 280px;
+            border-color: rgba(0, 255, 255, 0.6);
+            animation: rotate 14s linear infinite reverse;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        .ring-5 {
+            width: 240px;
+            height: 240px;
+            border-color: rgba(0, 255, 255, 0.7);
+            animation: rotate 12s linear infinite;
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+        }
+        
+        .ring-6 {
+            width: 200px;
+            height: 200px;
+            border-color: rgba(0, 255, 255, 0.8);
+            animation: rotate 10s linear infinite reverse;
+            box-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
+        }
+        
+        .core {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: 
+                radial-gradient(circle at center, 
+                    rgba(0, 255, 255, 1) 0%,
+                    rgba(0, 255, 255, 0.8) 30%,
+                    rgba(0, 200, 255, 0.6) 60%,
+                    rgba(0, 150, 255, 0.2) 100%);
+            border-radius: 50%;
+            animation: corePulse 2s ease-in-out infinite;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 1),
+                0 0 60px rgba(0, 255, 255, 0.8),
+                0 0 90px rgba(0, 255, 255, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .core.listening {
+            animation: coreListening 0.5s ease-in-out infinite;
+        }
+        
+        .core.speaking {
+            animation: coreSpeaking 0.8s ease-in-out infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes corePulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 0 30px rgba(0, 255, 255, 1),
+                    0 0 60px rgba(0, 255, 255, 0.8),
+                    0 0 90px rgba(0, 255, 255, 0.6);
+            }
+            50% { 
+                transform: scale(1.1);
+                box-shadow: 
+                    0 0 40px rgba(0, 255, 255, 1),
+                    0 0 80px rgba(0, 255, 255, 0.9),
+                    0 0 120px rgba(0, 255, 255, 0.7);
+            }
+        }
+        
+        @keyframes coreListening {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 0 40px rgba(255, 0, 255, 1),
+                    0 0 80px rgba(255, 0, 255, 0.8),
+                    0 0 120px rgba(255, 0, 255, 0.6);
+            }
+            50% { 
+                transform: scale(1.2);
+                box-shadow: 
+                    0 0 50px rgba(255, 0, 255, 1),
+                    0 0 100px rgba(255, 0, 255, 0.9),
+                    0 0 150px rgba(255, 0, 255, 0.7);
+            }
+        }
+        
+        @keyframes coreSpeaking {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 0 40px rgba(0, 255, 100, 1),
+                    0 0 80px rgba(0, 255, 100, 0.8),
+                    0 0 120px rgba(0, 255, 100, 0.6);
+            }
+            50% { 
+                transform: scale(1.15);
+                box-shadow: 
+                    0 0 50px rgba(0, 255, 100, 1),
+                    0 0 100px rgba(0, 255, 100, 0.9),
+                    0 0 150px rgba(0, 255, 100, 0.7);
+            }
+        }
+        
+        .left-panel, .right-panel {
+            background: rgba(15, 25, 45, 0.95);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(0, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            height: 400px;
+            align-self: start;
+        }
+        
+        .left-panel { grid-area: left-panel; }
+        .right-panel { grid-area: right-panel; }
+        
+        .panel-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #00d4ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 0.95rem;
+            padding: 12px;
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .metric:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: rgba(0, 255, 255, 0.3);
+        }
+        
+        .metric-label {
+            color: #ccc;
+        }
+        
+        .metric-value {
+            color: #00ff88;
+            font-weight: 600;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .progress-container {
+            margin: 20px 0;
+        }
+        
+        .progress-label {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #aaa;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .neural-progress {
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            width: 94%;
+            animation: neuralPulse 2s ease-in-out infinite alternate;
+        }
+        
+        .memory-progress {
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+            width: 67%;
+            animation: memoryFlow 3s ease-in-out infinite;
+        }
+        
+        .quantum-progress {
+            background: linear-gradient(90deg, #a8e6cf, #88d8c0);
+            width: 89%;
+            animation: quantumFlux 1.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes neuralPulse {
+            0% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.5); }
+            100% { box-shadow: 0 0 15px rgba(0, 212, 255, 0.8); }
+        }
+        
+        @keyframes memoryFlow {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(1.05); }
+        }
+        
+        @keyframes quantumFlux {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        .chat-panel {
+            grid-area: chat-panel;
+            width: 800px;
+            background: rgba(10, 20, 35, 0.98);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(0, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            overflow: hidden;
+            justify-self: center;
+        }
+        
+        .terminal-header {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 200, 255, 0.05));
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot.red { background: #ff5f57; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #28ca42; }
+        
+        .terminal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            color: #00d4ff;
+            font-weight: 600;
+        }
+        
+        .status-indicator {
+            margin-left: auto;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 12px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .status-indicator.online {
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            border-color: rgba(0, 255, 136, 0.3);
+        }
+        
+        .status-indicator.offline {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+        
+        .terminal {
+            background: rgba(0, 0, 0, 0.8);
+            height: 250px;
+            overflow-y: auto;
+            padding: 20px 25px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .terminal-line {
+            margin: 8px 0;
+            animation: terminalWrite 0.5s ease-out;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            word-wrap: break-word;
+        }
+        
+        @keyframes terminalWrite {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .prompt {
+            color: #00ff88;
+            font-weight: 600;
+            flex-shrink: 0;
+            font-size: 0.85rem;
+        }
+        
+        .user-input {
+            color: #ffff00;
+            flex: 1;
+        }
+        
+        .ai-response {
+            color: #00d4ff;
+            flex: 1;
+        }
+        
+        .system-msg {
+            color: #ff6600;
+            flex-shrink: 0;
+        }
+        
+        .error-msg {
+            color: #ff4444;
+            flex: 1;
+        }
+        
+        .cursor {
+            background: #00ff88;
+            width: 2px;
+            height: 14px;
+            animation: cursorBlink 1s infinite;
+            margin-left: 5px;
+            flex-shrink: 0;
+        }
+        
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .input-zone {
+            padding: 20px 25px;
+            background: rgba(15, 25, 45, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .command-input {
+            flex: 1;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 30px;
+            padding: 15px 25px;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .command-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 
+                0 0 20px rgba(0, 212, 255, 0.4),
+                inset 0 0 20px rgba(0, 212, 255, 0.1);
+            background: rgba(0, 212, 255, 0.15);
+        }
+        
+        .command-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .mic-btn {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #ff00ff, #9900ff);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mic-btn:hover:not(:disabled) {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+        }
+        
+        .mic-btn.listening {
+            background: linear-gradient(135deg, #ff0066, #ff0000);
+            animation: micPulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes micPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255, 0, 102, 0.8);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(255, 0, 102, 1);
+            }
+        }
+        
+        .send-btn {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #00d4ff, #0099ff);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .send-btn:hover:not(:disabled) {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.8);
+        }
+        
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .mic-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00d4ff, #0099ff);
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            box-shadow: 
+                0 4px 20px rgba(0, 212, 255, 0.3),
+                0 0 15px rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 
+                0 8px 25px rgba(0, 212, 255, 0.5),
+                0 0 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        .scroll-to-top::before {
+            content: '↑';
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00d4ff, #0099ff);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #00ffff, #00d4ff);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-areas: 
+                    "header"
+                    "center"
+                    "left-panel"
+                    "right-panel"
+                    "chat-panel";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto auto;
+                gap: 20px;
+            }
+            
+            .left-panel, .right-panel {
+                max-width: 600px;
+                justify-self: center;
+            }
+            
+            .chat-panel {
+                width: 95%;
+                max-width: 600px;
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 7s;"></div>
+    </div>
+    
+    <div class="scroll-to-top" id="scrollToTop"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">ECHO</div>
+            <div class="tagline">Enhanced Cognitive Holographic Operator</div>
+        </div>
+        
+        <div class="center">
+            <div class="holo-circle">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-3"></div>
+                <div class="ring ring-4"></div>
+                <div class="ring ring-5"></div>
+                <div class="ring ring-6"></div>
+                <div class="core" id="core"></div>
+            </div>
+        </div>
+        
+        <div class="left-panel">
+            <div class="panel-header">Neural Matrix</div>
+            <div class="metric">
+                <span class="metric-label">Core Status:</span>
+                <span class="metric-value" id="coreStatus">INITIALIZING</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Synapses:</span>
+                <span class="metric-value">847.2M</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label">Neural Activity</div>
+                <div class="progress-bar">
+                    <div class="progress-fill neural-progress"></div>
+                </div>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Learning Rate:</span>
+                <span class="metric-value">0.003</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Pattern Recognition:</span>
+                <span class="metric-value">99.7%</span>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="panel-header">System Resources</div>
+            <div class="metric">
+                <span class="metric-label">Memory Pool:</span>
+                <span class="metric-value">4.7TB</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label">Memory Usage</div>
+                <div class="progress-bar">
+                    <div class="progress-fill memory-progress"></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-label">Quantum Processing</div>
+                <div class="progress-bar">
+                    <div class="progress-fill quantum-progress"></div>
+                </div>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Response Time:</span>
+                <span class="metric-value">0.0001ms</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Voice Status:</span>
+                <span class="metric-value" id="voiceStatus">CHECKING</span>
+            </div>
+        </div>
+        
+        <div class="chat-panel">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-title">ECHO Neural Terminal</div>
+                <div class="status-indicator" id="connectionStatus">CONNECTING</div>
+            </div>
+            
+            <div class="terminal" id="terminal">
+                <div class="terminal-line">
+                    <span class="system-msg">[SYSTEM]</span>
+                    <span>ECHO Neural Core initialization starting...</span>
+                </div>
+            </div>
+            
+            <div class="input-zone">
+                <div class="input-container">
+                    <input type="text" class="command-input" id="commandInput" 
+                           placeholder="Type or speak your command..." autofocus>
+                    <button class="mic-btn" id="micBtn" title="Voice Input">🎤</button>
+                    <button class="send-btn" id="sendBtn">→</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        class ECHOInterface {
+            constructor() {
+                this.terminal = document.getElementById('terminal');
+                this.commandInput = document.getElementById('commandInput');
+                this.sendBtn = document.getElementById('sendBtn');
+                this.micBtn = document.getElementById('micBtn');
+                this.connectionStatus = document.getElementById('connectionStatus');
+                this.coreStatus = document.getElementById('coreStatus');
+                this.voiceStatus = document.getElementById('voiceStatus');
+                this.scrollToTopBtn = document.getElementById('scrollToTop');
+                this.core = document.getElementById('core');
+                
+                this.isProcessing = false;
+                this.isConnected = false;
+                this.isListening = false;
+                this.isSpeaking = false;
+                
+                // Voice recognition
+                this.recognition = null;
+                this.synthesis = window.speechSynthesis;
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.initVoiceRecognition();
+                this.checkServerStatus();
+                this.startupSequence();
+            }
+            
+            initVoiceRecognition() {
+                // Check if browser supports speech recognition
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                
+                if (SpeechRecognition) {
+                    this.recognition = new SpeechRecognition();
+                    this.recognition.continuous = false;
+                    this.recognition.interimResults = false;
+                    this.recognition.lang = 'en-US';
+                    
+                    this.recognition.onstart = () => {
+                        this.isListening = true;
+                        this.micBtn.classList.add('listening');
+                        this.core.classList.add('listening');
+                        this.addToTerminal('system', '🎤 Listening...');
+                    };
+                    
+                    this.recognition.onresult = (event) => {
+                        const transcript = event.results[0][0].transcript;
+                        this.commandInput.value = transcript;
+                        this.addToTerminal('user', `🎤 Voice: ${transcript}`);
+                        
+                        // Automatically send the command
+                        setTimeout(() => {
+                            this.handleCommand();
+                        }, 500);
+                    };
+                    
+                    this.recognition.onerror = (event) => {
+                        this.addToTerminal('error', `Voice recognition error: ${event.error}`);
+                        this.stopListening();
+                    };
+                    
+                    this.recognition.onend = () => {
+                        this.stopListening();
+                    };
+                    
+                    this.voiceStatus.textContent = 'ENABLED';
+                } else {
+                    this.voiceStatus.textContent = 'NOT SUPPORTED';
+                    this.micBtn.disabled = true;
+                    this.addToTerminal('system', 'Voice recognition not supported in this browser. Try Chrome or Edge.');
+                }
+                
+                // Check speech synthesis
+                if (!this.synthesis) {
+                    this.addToTerminal('system', 'Speech synthesis not available.');
+                }
+            }
+            
+            startListening() {
+                if (this.recognition && !this.isListening && !this.isProcessing) {
+                    try {
+                        this.recognition.start();
+                    } catch (error) {
+                        console.error('Recognition start error:', error);
+                    }
+                }
+            }
+            
+            stopListening() {
+                this.isListening = false;
+                this.micBtn.classList.remove('listening');
+                this.core.classList.remove('listening');
+            }
+            
+            speak(text) {
+                if (!this.synthesis) return;
+                
+                // Cancel any ongoing speech
+                this.synthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+                utterance.volume = 1.0;
+                
+                // Try to use a good voice
+                const voices = this.synthesis.getVoices();
+                const preferredVoices = voices.filter(voice => 
+                    voice.lang.startsWith('en') && 
+                    (voice.name.includes('Google') || voice.name.includes('Microsoft'))
+                );
+                
+                if (preferredVoices.length > 0) {
+                    utterance.voice = preferredVoices[0];
+                }
+                
+                utterance.onstart = () => {
+                    this.isSpeaking = true;
+                    this.core.classList.add('speaking');
+                };
+                
+                utterance.onend = () => {
+                    this.isSpeaking = false;
+                    this.core.classList.remove('speaking');
+                };
+                
+                utterance.onerror = () => {
+                    this.isSpeaking = false;
+                    this.core.classList.remove('speaking');
+                };
+                
+                this.synthesis.speak(utterance);
+            }
+            
+            setupEventListeners() {
+                this.sendBtn.addEventListener('click', () => this.handleCommand());
+                
+                this.micBtn.addEventListener('click', () => {
+                    if (this.isListening) {
+                        this.recognition.stop();
+                    } else {
+                        this.startListening();
+                    }
+                });
+                
+                this.commandInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !this.isProcessing) {
+                        this.handleCommand();
+                    }
+                });
+                
+                // Scroll to top functionality
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        this.scrollToTopBtn.classList.add('visible');
+                    } else {
+                        this.scrollToTopBtn.classList.remove('visible');
+                    }
+                });
+                
+                this.scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                
+                // Load voices when available
+                if (this.synthesis) {
+                    this.synthesis.onvoiceschanged = () => {
+                        console.log('Voices loaded:', this.synthesis.getVoices().length);
+                    };
+                }
+            }
+            
+            async checkServerStatus() {
+                try {
+                    const response = await fetch('/status');
+                    const data = await response.json();
+                    
+                    if (data.status === 'online') {
+                        this.isConnected = true;
+                        this.updateStatus('online', 'ONLINE', 'ACTIVE');
+                        this.addToTerminal('system', 'Flask backend connected successfully.');
+                    } else {
+                        this.updateStatus('offline', 'OFFLINE', 'ERROR');
+                    }
+                } catch (error) {
+                    console.error('Server connection failed:', error);
+                    this.updateStatus('offline', 'OFFLINE', 'ERROR');
+                    this.addToTerminal('system', 'Server connection failed. Using local mode.');
+                }
+            }
+            
+            updateStatus(connectionClass, statusText, coreText) {
+                this.connectionStatus.className = `status-indicator ${connectionClass}`;
+                this.connectionStatus.textContent = statusText;
+                this.coreStatus.textContent = coreText;
+            }
+            
+            addToTerminal(type, content) {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                
+                const timestamp = new Date().toLocaleTimeString();
+                
+                switch(type) {
+                    case 'user':
+                        line.innerHTML = `<span class="prompt">USER@terminal:~$</span> <span class="user-input">${this.escapeHtml(content)}</span>`;
+                        break;
+                    case 'ai':
+                        line.innerHTML = `<span class="prompt">ECHO@neural-core:~$</span> <span class="ai-response">${this.escapeHtml(content)}</span>`;
+                        break;
+                    case 'system':
+                        line.innerHTML = `<span class="system-msg">[SYSTEM ${timestamp}]</span> <span>${this.escapeHtml(content)}</span>`;
+                        break;
+                    case 'error':
+                        line.innerHTML = `<span class="system-msg">[ERROR]</span> <span class="error-msg">${this.escapeHtml(content)}</span>`;
+                        break;
+                }
+                
+                this.terminal.appendChild(line);
+                this.terminal.scrollTop = this.terminal.scrollHeight;
+                
+                // Keep terminal clean
+                if (this.terminal.children.length > 50) {
+                    this.terminal.removeChild(this.terminal.firstChild);
+                }
+            }
+            
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            async sendCommand(command) {
+                if (!this.isConnected) {
+                    throw new Error('Not connected to server');
+                }
+                
+                const response = await fetch('/command', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ command: command })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                return await response.json();
+            }
+            
+            async handleCommand() {
+                const command = this.commandInput.value.trim();
+                if (!command || this.isProcessing) return;
+                
+                this.isProcessing = true;
+                this.sendBtn.disabled = true;
+                this.micBtn.disabled = true;
+                this.sendBtn.innerHTML = '<div class="loading-spinner"></div>';
+                
+                this.addToTerminal('user', command);
+                this.commandInput.value = '';
+                
+                try {
+                    if (command.toLowerCase() === 'clear') {
+                        setTimeout(() => {
+                            this.terminal.innerHTML = '';
+                            this.addToTerminal('system', 'Terminal cleared.');
+                            this.resetInput();
+                        }, 300);
+                        return;
+                    }
+                    
+                    const response = await this.sendCommand(command);
+                    
+                    setTimeout(() => {
+                        if (response.text) {
+                            this.addToTerminal('ai', response.text);
+                            
+                            // Speak the response
+                            this.speak(response.text);
+                        } else {
+                            this.addToTerminal('ai', 'Command processed successfully.');
+                        }
+                        
+                        if (response.action === 'exit') {
+                            this.addToTerminal('system', 'Session terminated by user request.');
+                            this.commandInput.disabled = true;
+                            this.sendBtn.disabled = true;
+                            this.micBtn.disabled = true;
+                            return;
+                        }
+                        
+                        this.resetInput();
+                    }, 500);
+                    
+                } catch (error) {
+                    console.error('Command error:', error);
+                    const errorMsg = `Error connecting to ECHO Core: ${error.message}. Is the Python server running?`;
+                    this.addToTerminal('error', errorMsg);
+                    this.speak(errorMsg);
+                    this.resetInput();
+                }
+            }
+            
+            resetInput() {
+                this.isProcessing = false;
+                this.sendBtn.disabled = false;
+                this.sendBtn.innerHTML = '→';
+                
+                if (this.voiceStatus.textContent === 'ENABLED') {
+                    this.micBtn.disabled = false;
+                }
+                
+                this.commandInput.focus();
+            }
+            
+            startupSequence() {
+                const messages = [
+                    { delay: 1000, type: 'system', text: 'Neural pathways establishing...' },
+                    { delay: 2000, type: 'system', text: 'Holographic interface initializing...' },
+                    { delay: 3000, type: 'system', text: 'Voice synthesis calibrated.' },
+                    { delay: 4000, type: 'ai', text: 'Enhanced Cognitive Holographic Operator online.', speak: true },
+                    { delay: 5000, type: 'ai', text: 'Ready for advanced cognitive processing. How may I assist you?', speak: true },
+                    { delay: 6000, type: 'system', text: 'Try: hello, time, weather, calculate 2+2, play music, open google. Use 🎤 for voice input!' }
+                ];
+                
+                messages.forEach(msg => {
+                    setTimeout(() => {
+                        this.addToTerminal(msg.type, msg.text);
+                        if (msg.speak) {
+                            this.speak(msg.text);
+                        }
+                        if (msg === messages[messages.length - 1]) {
+                            const cursorLine = document.createElement('div');
+                            cursorLine.className = 'terminal-line';
+                            cursorLine.innerHTML = '<span class="prompt">ECHO@neural-core:~$</span> <span class="cursor"></span>';
+                            this.terminal.appendChild(cursorLine);
+                            this.terminal.scrollTop = this.terminal.scrollHeight;
+                        }
+                    }, msg.delay);
+                });
+            }
+        }
+        
+        // Initialize ECHO Interface when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ECHOInterface();
+        });
+    </script>
+</body>
+</html>
