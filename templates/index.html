@@ -511,6 +511,41 @@
             51%, 100% { opacity: 0; }
         }
         
+        /* Image Display Styles */
+        .image-container {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .captured-image {
+            max-width: 100%;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .captured-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        .image-caption {
+            color: #00d4ff;
+            font-size: 0.85rem;
+            font-style: italic;
+            text-align: center;
+        }
+        
         .input-zone {
             padding: 20px 25px;
             background: rgba(15, 25, 45, 0.8);
@@ -886,12 +921,8 @@
                     this.recognition.onresult = (event) => {
                         const transcript = event.results[0][0].transcript;
                         this.commandInput.value = transcript;
-                        this.addToTerminal('user', `🎤 Voice: ${transcript}`);
-                        
-                        // Automatically send the command
-                        setTimeout(() => {
-                            this.handleCommand();
-                        }, 500);
+                        // Automatically send the command by calling the handler directly
+                        this.handleCommand();
                     };
                     
                     this.recognition.onerror = (event) => {
@@ -919,21 +950,25 @@
             startListening() {
                 if (this.recognition && !this.isListening && !this.isProcessing) {
                     try {
+                        this.commandInput.value = ''; // Clear input before listening
                         this.recognition.start();
                     } catch (error) {
                         console.error('Recognition start error:', error);
+                        this.addToTerminal('error', 'Could not start voice recognition. It might already be active.');
                     }
                 }
             }
             
             stopListening() {
-                this.isListening = false;
-                this.micBtn.classList.remove('listening');
-                this.core.classList.remove('listening');
+                if (this.isListening) {
+                    this.isListening = false;
+                    this.micBtn.classList.remove('listening');
+                    this.core.classList.remove('listening');
+                }
             }
             
             speak(text) {
-                if (!this.synthesis) return;
+                if (!this.synthesis || !text) return;
                 
                 // Cancel any ongoing speech
                 this.synthesis.cancel();
@@ -943,15 +978,10 @@
                 utterance.pitch = 1.0;
                 utterance.volume = 1.0;
                 
-                // Try to use a good voice
                 const voices = this.synthesis.getVoices();
-                const preferredVoices = voices.filter(voice => 
-                    voice.lang.startsWith('en') && 
-                    (voice.name.includes('Google') || voice.name.includes('Microsoft'))
-                );
-                
-                if (preferredVoices.length > 0) {
-                    utterance.voice = preferredVoices[0];
+                const preferredVoice = voices.find(voice => voice.name === 'Google US English') || voices.find(voice => voice.lang === 'en-US');
+                if (preferredVoice) {
+                    utterance.voice = preferredVoice;
                 }
                 
                 utterance.onstart = () => {
@@ -989,7 +1019,6 @@
                     }
                 });
                 
-                // Scroll to top functionality
                 window.addEventListener('scroll', () => {
                     if (window.pageYOffset > 300) {
                         this.scrollToTopBtn.classList.add('visible');
@@ -1002,17 +1031,18 @@
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
                 
-                // Load voices when available
-                if (this.synthesis) {
+                if (this.synthesis.getVoices().length === 0) {
                     this.synthesis.onvoiceschanged = () => {
-                        console.log('Voices loaded:', this.synthesis.getVoices().length);
+                         console.log('Voices loaded:', this.synthesis.getVoices().length);
                     };
                 }
             }
             
             async checkServerStatus() {
                 try {
-                    const response = await fetch('/status');
+                    // Using a timestamp to prevent caching
+                    const response = await fetch(`/status?t=${new Date().getTime()}`);
+                    if (!response.ok) throw new Error('Server responded with an error');
                     const data = await response.json();
                     
                     if (data.status === 'online') {
@@ -1020,12 +1050,13 @@
                         this.updateStatus('online', 'ONLINE', 'ACTIVE');
                         this.addToTerminal('system', 'Flask backend connected successfully.');
                     } else {
-                        this.updateStatus('offline', 'OFFLINE', 'ERROR');
+                        throw new Error('Server status is offline');
                     }
                 } catch (error) {
                     console.error('Server connection failed:', error);
+                    this.isConnected = false;
                     this.updateStatus('offline', 'OFFLINE', 'ERROR');
-                    this.addToTerminal('system', 'Server connection failed. Using local mode.');
+                    this.addToTerminal('error', 'Could not connect to ECHO Core. Is the Python server running?');
                 }
             }
             
@@ -1035,35 +1066,39 @@
                 this.coreStatus.textContent = coreText;
             }
             
-            addToTerminal(type, content) {
-                const line = document.createElement('div');
-                line.className = 'terminal-line';
-                
-                const timestamp = new Date().toLocaleTimeString();
-                
-                switch(type) {
-                    case 'user':
-                        line.innerHTML = `<span class="prompt">USER@terminal:~$</span> <span class="user-input">${this.escapeHtml(content)}</span>`;
-                        break;
-                    case 'ai':
-                        line.innerHTML = `<span class="prompt">ECHO@neural-core:~$</span> <span class="ai-response">${this.escapeHtml(content)}</span>`;
-                        break;
-                    case 'system':
-                        line.innerHTML = `<span class="system-msg">[SYSTEM ${timestamp}]</span> <span>${this.escapeHtml(content)}</span>`;
-                        break;
-                    case 'error':
-                        line.innerHTML = `<span class="system-msg">[ERROR]</span> <span class="error-msg">${this.escapeHtml(content)}</span>`;
-                        break;
-                }
-                
-                this.terminal.appendChild(line);
-                this.terminal.scrollTop = this.terminal.scrollHeight;
-                
-                // Keep terminal clean
-                if (this.terminal.children.length > 50) {
-                    this.terminal.removeChild(this.terminal.firstChild);
-                }
-            }
+addToTerminal(type, content) {
+    const line = document.createElement('div');
+    line.className = 'terminal-line';
+    
+    switch(type) {
+        case 'user':
+            line.innerHTML = `<span class="prompt">USER@terminal:~$</span> <span class="user-input">${this.escapeHtml(content)}</span>`;
+            break;
+        case 'ai':
+            line.innerHTML = `<span class="prompt">ECHO@neural-core:~$</span> <span class="ai-response">${this.escapeHtml(content)}</span>`;
+            break;
+        case 'system':
+            const timestamp = new Date().toLocaleTimeString();
+            line.innerHTML = `<span class="system-msg">[SYSTEM ${timestamp}]</span> <span>${this.escapeHtml(content)}</span>`;
+            break;
+        case 'error':
+            line.innerHTML = `<span class="system-msg">[ERROR]</span> <span class="error-msg">${this.escapeHtml(content)}</span>`;
+            break;
+        case 'image':
+            line.innerHTML = `
+                <span class="prompt">ECHO@neural-core:~$</span> 
+                <div class="image-container">
+                    <img src="${content.url}" alt="${content.alt}" class="captured-image" 
+                         onclick="window.open('${content.url}', '_blank')" 
+                         title="Click to open in new tab">
+                    <div class="image-caption">${this.escapeHtml(content.caption)}</div>
+                </div>`;
+            break;
+    }
+    
+    this.terminal.appendChild(line);
+    this.terminal.scrollTop = this.terminal.scrollHeight;
+}
             
             escapeHtml(text) {
                 const div = document.createElement('div');
@@ -1073,19 +1108,18 @@
             
             async sendCommand(command) {
                 if (!this.isConnected) {
+                    // Simulate a local error without a real network call
                     throw new Error('Not connected to server');
                 }
                 
                 const response = await fetch('/command', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ command: command })
                 });
                 
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    throw new Error(`Server error: ${response.status} ${response.statusText}`);
                 }
                 
                 return await response.json();
@@ -1103,6 +1137,10 @@
                 this.addToTerminal('user', command);
                 this.commandInput.value = '';
                 
+                // Clear the "Ready for input" cursor if it exists
+                const existingCursor = this.terminal.querySelector('.cursor-line');
+                if(existingCursor) existingCursor.remove();
+                
                 try {
                     if (command.toLowerCase() === 'clear') {
                         setTimeout(() => {
@@ -1114,34 +1152,35 @@
                     }
                     
                     const response = await this.sendCommand(command);
-                    
-                    setTimeout(() => {
-                        if (response.text) {
-                            this.addToTerminal('ai', response.text);
-                            
-                            // Speak the response
-                            this.speak(response.text);
-                        } else {
-                            this.addToTerminal('ai', 'Command processed successfully.');
-                        }
-                        
-                        if (response.action === 'exit') {
-                            this.addToTerminal('system', 'Session terminated by user request.');
-                            this.commandInput.disabled = true;
-                            this.sendBtn.disabled = true;
-                            this.micBtn.disabled = true;
-                            return;
-                        }
-                        
-                        this.resetInput();
-                    }, 500);
+                    if (response.text) {
+                        this.addToTerminal('ai', response.text);
+                        this.speak(response.text);
+                    } else {
+                        this.addToTerminal('ai', 'Command processed successfully.');
+                    }
+
+                    // Display image if screenshot or photo was taken
+                    if (response.image_url) {
+                        this.addToTerminal('image', {
+                            url: response.image_url,
+                            alt: response.filename || 'Captured image',
+                            caption: `✓ ${response.filename || 'Image'} - Click to view full size`
+                        });
+                    }
+                    if (response.action === 'exit') {
+                        this.addToTerminal('system', 'Session terminated by user request.');
+                        this.commandInput.disabled = true;
+                    }
                     
                 } catch (error) {
                     console.error('Command error:', error);
-                    const errorMsg = `Error connecting to ECHO Core: ${error.message}. Is the Python server running?`;
+                    const errorMsg = `Error connecting to ECHO Core: ${error.message}.`;
                     this.addToTerminal('error', errorMsg);
-                    this.speak(errorMsg);
-                    this.resetInput();
+                    this.speak("I seem to be having trouble connecting to my core functions.");
+                } finally {
+                    if (!this.commandInput.disabled) {
+                       this.resetInput();
+                    }
                 }
             }
             
@@ -1163,8 +1202,7 @@
                     { delay: 2000, type: 'system', text: 'Holographic interface initializing...' },
                     { delay: 3000, type: 'system', text: 'Voice synthesis calibrated.' },
                     { delay: 4000, type: 'ai', text: 'Enhanced Cognitive Holographic Operator online.', speak: true },
-                    { delay: 5000, type: 'ai', text: 'Ready for advanced cognitive processing. How may I assist you?', speak: true },
-                    { delay: 6000, type: 'system', text: 'Try: hello, time, weather, calculate 2+2, play music, open google. Use 🎤 for voice input!' }
+                    { delay: 5500, type: 'ai', text: 'Ready for advanced cognitive processing. How may I assist you?', speak: true },
                 ];
                 
                 messages.forEach(msg => {
@@ -1173,19 +1211,11 @@
                         if (msg.speak) {
                             this.speak(msg.text);
                         }
-                        if (msg === messages[messages.length - 1]) {
-                            const cursorLine = document.createElement('div');
-                            cursorLine.className = 'terminal-line';
-                            cursorLine.innerHTML = '<span class="prompt">ECHO@neural-core:~$</span> <span class="cursor"></span>';
-                            this.terminal.appendChild(cursorLine);
-                            this.terminal.scrollTop = this.terminal.scrollHeight;
-                        }
                     }, msg.delay);
                 });
             }
         }
         
-        // Initialize ECHO Interface when page loads
         document.addEventListener('DOMContentLoaded', () => {
             new ECHOInterface();
         });
