@@ -1,7 +1,6 @@
-# app.py (The Flask Web Server)
-
-from flask import Flask, request, jsonify, render_template
-import main # Imports the logic from your main.py file
+from flask import Flask, request, jsonify, render_template, send_from_directory
+import main 
+import os
 
 # Check if pyttsx3 is available for a status check
 try:
@@ -11,6 +10,11 @@ except ImportError:
     TTS_AVAILABLE = False
 
 app = Flask(__name__, template_folder='templates')
+
+# Create a directory for captured images if it doesn't exist
+CAPTURE_FOLDER = 'captures'
+if not os.path.exists(CAPTURE_FOLDER):
+    os.makedirs(CAPTURE_FOLDER)
 
 @app.route('/')
 def index():
@@ -40,6 +44,10 @@ def handle_command():
     # Return the dictionary response as JSON to the UI
     return jsonify(response_data)
 
+@app.route('/captures/<filename>')
+def serve_capture(filename):
+    """Serve captured images and screenshots."""
+    return send_from_directory(CAPTURE_FOLDER, filename)
+
 if __name__ == '__main__':
-    # Use host='0.0.0.0' to make it accessible on your local network
     app.run(host='0.0.0.0', port=5000, debug=True)
