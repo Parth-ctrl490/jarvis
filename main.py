@@ -482,6 +482,7 @@ music = {
     "skyfall": "https://www.youtube.com/watch?v=DeumyOzKqgI",
     "believer": "https://www.youtube.com/watch?v=7wtfhZwyrcc",
     "shape of you": "https://www.youtube.com/watch?v=JGwWNGJdvx8",
+    "lecture": "https://www.youtube.com/watch?v=ZOhUXDe1Xr0&list=PL5Dqs90qDljVjbp18F1uw8cXgOobTOFGf"
 }
 
 def play_music(track_name):
@@ -902,3 +903,4 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             print("\nGoodbye!")
             break
+
