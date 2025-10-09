@@ -8,6 +8,7 @@ import re
 import random
 import json
 from pathlib import Path
+import base64
 
 # Optional imports with error handling
 try:
@@ -81,6 +82,52 @@ def clear_conversation():
     if os.path.exists(CONVERSATION_FILE):
         os.remove(CONVERSATION_FILE)
     return {"text": "Conversation history cleared. Starting fresh!"}
+
+# ==================== AI IMAGE GENERATION ====================
+def generate_image(prompt):
+    """
+    Generate an image using Pollinations AI (FREE, no API key needed)
+    Alternative: Can also use Stable Diffusion API or other services
+    """
+    try:
+        print(f"Generating image for prompt: {prompt}")
+        
+        # Create captures directory if it doesn't exist
+        os.makedirs("captures", exist_ok=True)
+        
+        # Clean the prompt for URL
+        clean_prompt = prompt.strip()
+        
+        # Using Pollinations AI - FREE image generation
+        # Encode prompt for URL
+        encoded_prompt = requests.utils.quote(clean_prompt)
+        image_url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=1024&height=1024&nologo=true"
+        
+        # Download the image
+        response = requests.get(image_url, timeout=30)
+        
+        if response.status_code == 200:
+            # Save the image
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"generated_{timestamp}.png"
+            filepath = os.path.join("captures", filename)
+            
+            with open(filepath, 'wb') as f:
+                f.write(response.content)
+            
+            return {
+                "text": f"Image generated successfully! Prompt: '{prompt}'",
+                "action": "image_generated",
+                "image_url": f"/captures/{filename}",
+                "filename": filename
+            }
+        else:
+            return {"text": "Failed to generate image. Please try again with a different prompt."}
+            
+    except Exception as e:
+        error_msg = f"Image generation error: {str(e)}"
+        print(error_msg)
+        return {"text": "Sorry, I couldn't generate the image. Please try again."}
 
 # ==================== AI CONVERSATION HANDLER ====================
 def clean_response_for_voice(text):
@@ -200,9 +247,11 @@ def is_system_command(command):
         'open github', 'open spotify', 'open gmail', 'open calculator',
         'play music', 'play ',
         'screenshot', 'take picture', 'photo',
+        'generate image', 'create image', 'draw', 'make image',
         'time', 'date',
         'weather',
         'battery',
+        'news', 'article',
         'system info', 'system status',
         'create file', 'read file',
         'note ', 'list notes', 'show notes',
@@ -223,7 +272,7 @@ def is_system_command(command):
     
     return False, None
 
-# ==================== ADVANCED FEATURES (keeping existing functions) ====================
+# ==================== ADVANCED FEATURES ====================
 
 def get_system_info():
     if not PSUTIL_AVAILABLE:
@@ -482,7 +531,9 @@ music = {
     "skyfall": "https://www.youtube.com/watch?v=DeumyOzKqgI",
     "believer": "https://www.youtube.com/watch?v=7wtfhZwyrcc",
     "shape of you": "https://www.youtube.com/watch?v=JGwWNGJdvx8",
-    "lecture": "https://www.youtube.com/watch?v=ZOhUXDe1Xr0&list=PL5Dqs90qDljVjbp18F1uw8cXgOobTOFGf"
+    "lecture": "https://www.youtube.com/watch?v=ZOhUXDe1Xr0&list=PL5Dqs90qDljVjbp18F1uw8cXgOobTOFGf",
+    "faded": "https://www.youtube.com/watch?v=60ItHLz5sQw",
+    
 }
 
 def play_music(track_name):
@@ -688,8 +739,24 @@ def execute_command(command):
         if is_command:
             command_lower = command.lower()
             
+            # Image Generation - NEW FEATURE
+            if any(phrase in command_lower for phrase in ['generate image', 'create image', 'draw me', 'make image', 'generate picture']):
+                # Extract the prompt
+                prompt = command_lower
+                for phrase in ['generate image of', 'create image of', 'draw me', 'make image of', 'generate picture of', 'generate image', 'create image', 'draw', 'make image']:
+                    prompt = prompt.replace(phrase, '').strip()
+                
+                if not prompt:
+                    return {"text": "Please provide a description for the image you want to generate."}
+                
+                return generate_image(prompt)
+            
+            # News and Articles - FIXED
+            elif any(word in command_lower for word in ['news', 'article', 'headlines']):
+                return get_article()
+            
             # Time and Date
-            if any(word in command_lower for word in ['time', 'clock']):
+            elif any(word in command_lower for word in ['time', 'clock']):
                 return tell_time()
             
             elif any(word in command_lower for word in ['date', 'today']) and 'update' not in command_lower:
@@ -775,10 +842,6 @@ def execute_command(command):
             elif 'picture' in command_lower or 'photo' in command_lower:
                 return take_picture()
             
-            # News/Articles
-            elif any(word in command_lower for word in ['news', 'article']):
-                return get_article()
-            
             # System Information
             elif 'system info' in command_lower or 'system status' in command_lower:
                 return get_system_info()
@@ -825,11 +888,16 @@ def execute_command(command):
                     "💬 CONVERSATIONAL AI:\n"
                     "- Ask me anything! I can answer questions, help with problems, write content, explain concepts, and have natural conversations.\n"
                     "- Just chat naturally - I remember our conversation context.\n\n"
+                    "🎨 AI IMAGE GENERATION (NEW!):\n"
+                    "- 'generate image of [description]'\n"
+                    "- 'create image of a sunset over mountains'\n"
+                    "- 'draw me a futuristic city'\n\n"
                     "🛠️ SYSTEM COMMANDS:\n"
                     "⏰ Time & Date: 'time', 'date'\n"
                     "🎵 Music: 'play [song name]'\n"
                     "🌐 Web: 'open google/youtube/github/spotify/gmail'\n"
                     "🔍 Search: 'search [query]'\n"
+                    "📰 News: 'news', 'article', 'headlines'\n"
                     "🌤️ Weather: 'weather'\n"
                     "🔋 Battery: 'battery status'\n"
                     "📸 Capture: 'screenshot', 'take picture'\n"
@@ -889,8 +957,8 @@ if __name__ == "__main__":
             return input("You: ")
             
     print("ECHO AI Assistant - Standalone Mode")
-    print("Now with conversational AI! Ask me anything or use system commands.")
-    speak("Hello! I'm ECHO with enhanced conversational abilities. How can I assist you today?")
+    print("Now with conversational AI and image generation! Ask me anything or use system commands.")
+    speak("Hello! I'm ECHO with enhanced conversational abilities and AI image generation. How can I assist you today?")
     
     while True:
         try:
@@ -903,4 +971,3 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             print("\nGoodbye!")
             break
-
